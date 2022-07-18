@@ -30,7 +30,7 @@ Encryption password:
 Path to GPG program [/usr/bin/gpg]:
 Use HTTPS protocol [Yes]: no
 
-
+s3cmd --config minio.s3cfg put /workspace/docker-airflow-spark/minio-data/iris.parq s3://iris
 
 
 
@@ -40,3 +40,10 @@ chmod +x trino
 
 ./trino --execute "
 SHOW CATALOGS;"
+
+
+git add path/to/folder/.gitignore
+
+git add logs/.gitignore
+
+git add path/to/folder/.gitignore

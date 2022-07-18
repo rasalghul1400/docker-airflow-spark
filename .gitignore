@@ -12,9 +12,7 @@ __pycache__
 *.log
 **/logs/debug.log
 */logs
-docker/postgres-db-volume/*
-logs/
-minio-data/
+*/minio-data
 .trino
 metastore_db
 derby.log
