@@ -79,7 +79,7 @@ services:
     networks:
       - oasiscorp
 
-
+  # Big Data Engine
   trino:
     hostname: trino
     image: 'trinodb/trino:latest'
@@ -153,7 +153,8 @@ services:
       retries: 5
     restart: always
 
-
+volumes:
+  postgres-db-volume:
 
 networks:
   oasiscorp:
