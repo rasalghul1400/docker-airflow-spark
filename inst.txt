@@ -19,11 +19,24 @@ sudo apt install -y \
 . docker compose  -f docker-compose.yaml  -f docker-compose.spark.yaml down --remove-orphans -v
 
 
+s3cmd --config minio.s3cfg --configure
+
+Access Key: minio_access_key
+Secret Key: minio_secret_key
+Default Region [US]:
+S3 Endpoint [s3.amazonaws.com]: localhost:9000
+DNS-style bucket+hostname:port template for accessing a bucket [%(bucket)s.s3.amazonaws.com]: localhost:9000
+Encryption password:
+Path to GPG program [/usr/bin/gpg]:
+Use HTTPS protocol [Yes]: no
+
+
+
+
 
 wget https://repo1.maven.org/maven2/io/trino/trino-cli/390/trino-cli-390-executable.jar \
   -O trino
-
 chmod +x trino
 
-
-
+./trino --execute "
+SHOW CATALOGS;"

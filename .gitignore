@@ -17,3 +17,5 @@ docker/logs/*
 docker/minio/*
 metastore_db
 derby.log
+docker/minio-data/*
+./trino 
