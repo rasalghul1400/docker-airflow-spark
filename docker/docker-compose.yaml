@@ -41,7 +41,7 @@ x-airflow-common:
 
 services:
 
-
+  # Postgre DB
   postgres:
     image: 'postgres:latest'
     container_name: postgres_container
@@ -64,6 +64,22 @@ services:
     restart: always
 
 
+  # Hive Metastore
+  hive-metastore:
+    hostname: hive-metastore
+    image: 'bitsondatadev/hive-metastore:latest'
+    ports:
+      - '9083:9083' # Metastore Thrift
+    volumes:
+      - ./conf/metastore-site.xml:/opt/apache-hive-metastore-3.0.0-bin/conf/metastore-site.xml:ro
+    environment:
+      METASTORE_DB_HOSTNAME: mypostgres
+    depends_on:
+      - postgres
+    networks:
+      - oasiscorp
+
+  # Redis DB
   redis:
     image: 'redis:latest'
     networks:
@@ -77,6 +93,7 @@ services:
       retries: 50
     restart: always
 
+  # Airflow Web UI
   airflow-webserver:
     <<: *airflow-common
     command: webserver
@@ -89,16 +106,19 @@ services:
       retries: 5
     restart: always
 
+  # Airflow Scheduler
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
     restart: always
 
+  # Airflow Worker 
   airflow-worker:
     <<: *airflow-common
     command: celery worker
     restart: always
 
+  # Airflow DB
   airflow-init:
     <<: *airflow-common
     command: version
@@ -109,6 +129,7 @@ services:
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
 
+  # Flowe
   flower:
     <<: *airflow-common
     command: celery flower
@@ -121,9 +142,6 @@ services:
       retries: 5
     restart: always
 
-
-volumes:
-  postgres-db-volume:
 
 
 networks:
