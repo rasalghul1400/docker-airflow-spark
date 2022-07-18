@@ -1,0 +1,4 @@
+1. sudo chmod 777 -R ./dags ./doc ./docker ./logs ./notebooks ./spark
+2. minio .yaml 
+3. https://github.com/njanakiev/trino-minio-docker/blob/master/docker-compose.yml inspo 
+4. 
