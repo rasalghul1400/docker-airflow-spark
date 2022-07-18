@@ -1,4 +1,14 @@
 1. sudo chmod 777 -R ./dags ./doc ./docker ./logs ./notebooks ./spark
 2. minio .yaml 
 3. https://github.com/njanakiev/trino-minio-docker/blob/master/docker-compose.yml inspo 
-4. 
+4. mod .yaml 
+5. connecting to a hive metatore requires trino?
+6. S3 command  [https://s3tools.org/s3cmd]
+
+< line sudo apt update
+sudo apt install -y \
+    s3cmd \
+    openjdk-11-jre-headless  # Needed for trino-cli >
+
+7. 
+
