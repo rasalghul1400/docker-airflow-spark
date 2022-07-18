@@ -140,7 +140,7 @@ services:
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
 
-  # Flower
+  # Flower: Flower is a web based tool for monitoring and administrating Celery clusters.
   flower:
     <<: *airflow-common
     command: celery flower
