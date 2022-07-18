@@ -13,8 +13,9 @@ __pycache__
 **/logs/debug.log
 */logs
 docker/postgres-db-volume/*
-docker/logs/*
-docker/minio/*
+logs/
+minio-data/
+.trino
 metastore_db
 derby.log
 docker/minio-data/*
