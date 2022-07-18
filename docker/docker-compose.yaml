@@ -45,7 +45,7 @@ services:
   postgres:
     image: 'postgres:latest'
     container_name: postgres_container
-    hostname: mypostgres
+    hostname: postgres
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
@@ -73,7 +73,7 @@ services:
     volumes:
       - ../conf/metastore-site.xml:/opt/apache-hive-metastore-3.0.0-bin/conf/metastore-site.xml
     environment:
-      METASTORE_DB_HOSTNAME: mypostgres
+      METASTORE_DB_HOSTNAME: postgres
     depends_on:
       - postgres
     networks:
