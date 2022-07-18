@@ -2,26 +2,44 @@ version: '3'
 services:
 
   # Minio S3
+
   minio:
-        hostname: myminio
-        container_name: minio_container
-        image: 'bitnami/minio:latest' # latest image as of 2021-11-08
-        environment:
-            MINIO_ROOT_USER: minio
-            MINIO_ROOT_PASSWORD: miniosecret
-        ports:
-            - '9000:9000'
-            - '9001:9001'
-        volumes:
-            - '../minio/data:/data'
-        networks:
-            - oasiscorp
-        healthcheck:
-            test: ["CMD", "curl", "-f", "http://myminio:9000/minio/health/live"]
-            interval: 30s
-            timeout: 20s
-            retries: 3
-        restart: always
+    hostname: minio
+    image: 'minio/minio:RELEASE.2021-01-08T21-18-21Z'
+    container_name: minio
+    ports:
+      - '9000:9000'
+    volumes:
+      - minio-data:/data
+    environment:
+      MINIO_ACCESS_KEY: minio_access_key
+      MINIO_SECRET_KEY: minio_secret_key
+    command: server /data
+    networks:
+      - oasiscorp
+
+
+
+  # minio:
+  #       hostname: myminio
+  #       container_name: minio_container
+  #       image: 'bitnami/minio:latest' # latest image as of 2021-11-08
+  #       environment:
+  #           MINIO_ROOT_USER: minio
+  #           MINIO_ROOT_PASSWORD: miniosecret
+  #       ports:
+  #           - '9000:9000'
+  #           - '9001:9001'
+  #       volumes:
+  #           - '../minio/data:/data'
+  #       networks:
+  #           - oasiscorp
+  #       healthcheck:
+  #           test: ["CMD", "curl", "-f", "http://myminio:9000/minio/health/live"]
+  #           interval: 30s
+  #           timeout: 20s
+  #           retries: 3
+  #       restart: always
 
 
    # Jupyter notebook
@@ -106,7 +124,10 @@ services:
     environment:
       - "SPARK_MASTER=spark://spark-master:7077"
   
-        
+volumes:
+  minio-data:
+    driver: local
+
 networks:
   oasiscorp:
     driver: bridge

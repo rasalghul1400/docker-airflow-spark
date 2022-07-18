@@ -10,5 +10,20 @@ sudo apt install -y \
     s3cmd \
     openjdk-11-jre-headless  # Needed for trino-cli >
 
-7. 
+7. add conf file 
+7.1 rename the test init for postgres to metastore
+8. inside the conf file add xml 
+9. chnage the minio to newer version
+
+. docker compose  -f docker-compose.yaml  -f docker-compose.spark.yaml up -d 
+. docker compose  -f docker-compose.yaml  -f docker-compose.spark.yaml down --remove-orphans -v
+
+
+
+wget https://repo1.maven.org/maven2/io/trino/trino-cli/390/trino-cli-390-executable.jar \
+  -O trino
+
+chmod +x trino
+
+
 
