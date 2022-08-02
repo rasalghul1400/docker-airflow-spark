@@ -83,3 +83,46 @@ CREATE SCHEMA datalake.myschema;"
 
 
 
+
+
+s3cmd put foobar s3://linuxconfigorg/new_directory/
+
+s3cmd --config minio.s3cfg put foobar s3://bronze/logs/
+
+s3cmd --config minio.s3cfg put /workspace/docker-airflow-spark/minio-data/bronze/logs/access_log.json s3://bronze/logs
+
+
+s3cmd --config minio.s3cfg put /workspace/docker-airflow-spark/minio-data/iris.parq s3://datalake
+
+
+s3cmd --config minio.s3cfg put /workspace/docker-airflow-spark/minio-data/access_log.json s3://bronze/logs/
+
+s3cmd --config minio.s3cfg mb s3://bronze/logs/
+
+mport boto3
+
+s3 = boto3.resource('s3', 
+  endpoint_url='http://localhost:9000', 
+  config=boto3.session.Config(signature_version='s3v4')
+)
+
+export AWS_SECRET_ACCESS_KEY=minio_access_key
+
+export AWS_ACCESS_KEY_ID="minio_access_key"
+export AWS_SECRET_ACCESS_KEY="minio_secret_key"
+export AWS_DEFAULT_REGION=us-west-2
+
+
+[default]
+aws_access_key_id=minio_access_key
+aws_secret_access_key=minio_secret_key
+
+
+sudo apt-get install unzip
+unzip github-analytics-main.zip -d ./prune
+
+
+sudo chmod 777 /workspace/docker-airflow-spark/prune/prune/github-analytics-main/src/Airflow/logs/github_dag/*
+
+
+s3://${S3BUCKET_NAME}
